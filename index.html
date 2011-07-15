@@ -1,0 +1,257 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>notnotnotnotnotnotnotnotnotnotnotnotnotnotnotjosh</title>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+<script type="text/javascript" src="js/jrumble.1.1.min.js"></script>
+<script charset="utf-8" type="text/javascript" src="js/corns_webkit.js"></script>
+<link charset="utf-8" media="screen" type="text/css" href="css/corns_webkit.css" rel="stylesheet">
+<style type="text/css" media="screen">
+html,
+body,
+p,
+div
+{
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+div#corn
+{
+	position: absolute;
+	z-index: 20;
+
+	width: 558px;
+	height: 307px;
+
+	bottom: -15px;
+	left: -15px;
+
+	background-image: url(images/corn.png);
+}
+
+div#crop
+{
+	position: absolute;
+	z-index: 10;
+
+	width: 100%;
+	height: 191px;
+
+	bottom: 0;
+	left: 0;
+
+	background-image: url(images/crop.png);
+}
+
+h1#ham
+{
+	position: absolute;
+	z-index: 30;
+
+	width: 600px;
+	height: 40px;
+
+	top: 50%;
+	left: 50%;
+
+	margin: -20px -300px;
+	text-align: center;
+
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 96px;
+	color: #fff;
+	text-shadow: 2px -3px 12px #3300FF, 5px -5px 4px #FFFF33, 12px -10px 6px #FFDD33, 15px -15px 11px #8800FF, 25px -25px 18px #22FF00;
+}
+
+p#notjosh
+{
+	position: absolute;
+	z-index: 30;
+
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	color: #fff;
+	text-shadow: 2px 2px 2px #000;
+
+	right: 3px;
+	bottom: 3px;
+}
+
+p#notjosh a
+{
+  color: #f0f;
+  font-size: 18px;
+}
+</style>
+
+<script type="text/javascript">
+function randomBg() {
+	var hex1=new Array("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F")
+	var hex2=new Array("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F")
+	var hex3=new Array("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F")
+	var hex4=new Array("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F")
+	var hex5=new Array("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F")
+	var hex6=new Array("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F")
+	var bg="#"+hex1[Math.floor(Math.random()*hex1.length)]+hex2[Math.floor(Math.random()*hex2.length)]+hex3[Math.floor(Math.random()*hex3.length)]+hex4[Math.floor(Math.random()*hex4.length)]+hex5[Math.floor(Math.random()*hex5.length)]+hex6[Math.floor(Math.random()*hex6.length)]
+	document.bgColor = bg
+}
+
+function timedChange() {
+	hexchanger = setInterval("randomBg()", 100)
+}
+
+
+/*
+Snow Fall 1 - no images - Java Script
+Visit http://rainbow.arch.scriptmania.com/scripts/
+  for this script and many more
+*/
+
+// Set the number of snowflakes (more than 30 - 40 not recommended)
+var snowmax=35
+
+// Set the colors for the snow. Add as many colors as you like
+var snowcolor=new Array("#AAAACC","#DDDDFF","#CCCCDD","#F3F3F3","#F0FFFF")
+
+// Set the fonts, that create the snowflakes. Add as many fonts as you like
+var snowtype=new Array("Arial Black","Arial Narrow","Times","Comic Sans MS")
+
+// Set the letter that creates your snowflake (recommended: * )
+var snowletter="<img src=\"images/corn-kernel-lol-2.png\" />"
+
+// Set the speed of sinking (recommended values range from 0.3 to 2)
+var sinkspeed=0.6
+
+// Set the maximum-size of your snowflakes
+var snowmaxsize=22
+
+// Set the minimal-size of your snowflakes
+var snowminsize=8
+
+// Set the snowing-zone
+// Set 1 for all-over-snowing, set 2 for left-side-snowing 
+// Set 3 for center-snowing, set 4 for right-side-snowing
+var snowingzone=1
+
+  /*
+   //   * NO CONFIGURATION BELOW HERE *
+*/
+
+// Do not edit below this line
+var snow=new Array()
+var marginbottom
+var marginright
+var timer
+var i_snow=0
+var x_mv=new Array();
+var crds=new Array();
+var lftrght=new Array();
+var browserinfos=navigator.userAgent 
+var ie5=document.all&&document.getElementById&&!browserinfos.match(/Opera/)
+var ns6=document.getElementById&&!document.all
+var opera=browserinfos.match(/Opera/)
+
+var browserok=ie5||ns6||opera
+
+function randommaker(range) {   
+  rand=Math.floor(range*Math.random())
+    return rand
+}
+
+function initsnow() {
+  if (ie5 || opera) {
+    marginbottom = document.body.clientHeight
+    marginright = document.body.clientWidth
+  }
+  else if (ns6) {
+    marginbottom = window.innerHeight
+    marginright = window.innerWidth
+  }
+  var snowsizerange=snowmaxsize-snowminsize
+  for (i=0;i<=snowmax;i++) {
+    crds[i] = 0;                      
+      lftrght[i] = Math.random()*15;         
+      x_mv[i] = 0.03 + Math.random()/10;
+    snow[i]=document.getElementById("s"+i)
+    snow[i].style.fontFamily=snowtype[randommaker(snowtype.length)]
+    snow[i].size=randommaker(snowsizerange)+snowminsize
+    snow[i].style.fontSize=snow[i].size
+    snow[i].style.color=snowcolor[randommaker(snowcolor.length)]
+    snow[i].sink=sinkspeed*snow[i].size/5
+    if (snowingzone==1) {snow[i].posx=randommaker(marginright-snow[i].size)}
+    if (snowingzone==2) {snow[i].posx=randommaker(marginright/2-snow[i].size)}
+    if (snowingzone==3) {snow[i].posx=randommaker(marginright/2-snow[i].size)+marginright/4}
+    if (snowingzone==4) {snow[i].posx=randommaker(marginright/2-snow[i].size)+marginright/2}
+    snow[i].posy=randommaker(2*marginbottom-marginbottom-2*snow[i].size)
+    snow[i].style.left=snow[i].posx + 'px';
+    snow[i].style.top=snow[i].posy + 'px';
+  }
+  movesnow()
+}
+
+function movesnow() {
+  for (i=0;i<=snowmax;i++) {
+    crds[i] += x_mv[i];
+    snow[i].posy+=snow[i].sink
+    snow[i].style.left=snow[i].posx+lftrght[i]*Math.sin(crds[i]) + 'px';
+    snow[i].style.top=snow[i].posy + 'px';
+    
+    if (snow[i].posy>=marginbottom-2*snow[i].size || parseInt(snow[i].style.left)>(marginright-3*lftrght[i])){
+      if (snowingzone==1) {snow[i].posx=randommaker(marginright-snow[i].size)}
+      if (snowingzone==2) {snow[i].posx=randommaker(marginright/2-snow[i].size)}
+      if (snowingzone==3) {snow[i].posx=randommaker(marginright/2-snow[i].size)+marginright/4}
+      if (snowingzone==4) {snow[i].posx=randommaker(marginright/2-snow[i].size)+marginright/2}
+      snow[i].posy=0
+    }
+  }
+  var timer=setTimeout("movesnow()",50)
+}
+
+
+if ($.browser.safari){
+  window.addEventListener('load', function() { timedChange(); initsafari(); }, false);
+} else {
+  for (i=0;i<=snowmax;i++) {
+    document.write("<span id='s"+i+"' style='position:absolute;top:-"+snowmaxsize+"'>"+snowletter+"</span>");
+  }
+  window.onload = function() { timedChange(); initsnow(); }
+}
+</script>
+
+</head>
+<body>
+  <div id="cornsContainer"></div>
+	<div id="corn"></div>
+	<div id="crop"></div>
+	<h1 id="ham">corn life</h1>
+
+	<p id="notjosh">notjosh's adventures in north america &bull; <a href="http://pub8.bravenet.com/guestbook/610455136/">View my Guestbook</a></p>
+
+<script type="text/javascript">
+$(document).ready(function(){						   	
+	$('#corn').jrumble({
+		rangeX: 4,
+		rangeY: 4,
+		rangeRot: 3,
+		rumbleEvent: 'constant'
+	});
+});
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-22544944-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
